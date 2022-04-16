@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Constants\Status;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -25,7 +26,7 @@ class UserController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
-        return response()->json(['message' => 'You have successfully registered, utilize your phone and password to log in']);
+        return $this->success('You have successfully registered, utilize your phone and password to log in');
 
     }
 
@@ -48,7 +49,7 @@ class UserController extends Controller
         $pass_check = Hash::check($request->password, User::query()->where('phone', $request->phone)->firstOrFail()->password);
 
         if ($user && $pass_check) {
-            return response()->json([
+            return $this->success([
                 'user' => $user,
                 'token' => $user->createToken('token_base_name')->plainTextToken
             ]);
@@ -66,7 +67,7 @@ class UserController extends Controller
 
         $user->tokens()->delete();
 
-        return \response()->json('logged out');
+        return $this->success('logged out');
     }
 
 
@@ -81,9 +82,9 @@ class UserController extends Controller
             User::query()->where('id', '=', auth()->id())->update([
                 'password' => Hash::make($request->new_pass)
             ]);
-            return $this->response(1,'password changed to ' . $request->new_pass);
+            return $this->success('password changed to ' . $request->new_pass);
         } else {
-            return $this->response(0,'token ERROR');
+            return $this->error(Status::PASSWORD_IS_WRONG);
         }
     }
 }
