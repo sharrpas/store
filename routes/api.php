@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,7 +21,8 @@ Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::post('/logout',[UserController::class,'logout'])->middleware('auth:sanctum')->name('logout');
 Route::post('/change/pass',[UserController::class, 'changePass'])->middleware('auth:sanctum')->name('changePass');
 
-
+//menu
+Route::get('categories',[CategoryController::class, 'index'])->name('categories');
 
 
 
