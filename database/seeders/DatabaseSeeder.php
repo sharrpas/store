@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Attribute;
 use App\Models\Category;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -20,7 +21,12 @@ class DatabaseSeeder extends Seeder
         Category::query()->firstOrCreate(['title' => 'clothes']);
         Category::query()->firstOrCreate(['title' => 'hat']);
 
-//        $category->attributes->create(['title' => 'size']);
+        $attribute = Attribute::query()->firstOrcreate(['title' => 'size']);
 
+        $category->attributes()->detach();
+        $category->attributes()->attach($attribute->id);
+
+        $attribute->values()->firstOrCreate(['title' => '40']);
+        $attribute->values()->firstOrCreate(['title' => '41']);
     }
 }
