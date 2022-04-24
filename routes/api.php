@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,8 @@ Route::post('/change/pass',[UserController::class, 'changePass'])->middleware('a
 //menu
 Route::get('categories',[CategoryController::class, 'index'])->name('categories');
 
-
+//products
+Route::get('{category}/products',[ProductController::class,'index']);
+Route::get('product/{product}',[ProductController::class,'show']);
 
 
