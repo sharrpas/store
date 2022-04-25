@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
 
         //attribute_values
         $attribute->values()->firstOrCreate(['title' => '40']);
-        $attribute->values()->firstOrCreate(['title' => '41']);
+        $v41 =  $attribute->values()->firstOrCreate(['title' => '41']);
 
         //products
         $product = Product::query()->firstOrCreate(['title' => 'walking shoes', 'inventory' => 4]);
@@ -42,5 +42,9 @@ class DatabaseSeeder extends Seeder
         //category_product
         $product->categories()->detach();
         $product->categories()->attach($category->id);
+
+        //attribute_values_product
+        $product->attribute_values()->detach();
+        $product->attribute_values()->attach($v41->id);
     }
 }
