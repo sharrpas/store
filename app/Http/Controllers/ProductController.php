@@ -17,6 +17,6 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        return $this->success(ProductResource::make($product->load('images')));
+        return $this->success(ProductResource::make($product->load(['images','attribute_values'])));
     }
 }

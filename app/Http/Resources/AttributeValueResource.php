@@ -2,10 +2,10 @@
 
 namespace App\Http\Resources;
 
-use App\Models\ImageProduct;
+use App\Models\Attribute;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ProductResource extends JsonResource
+class AttributeValueResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,12 +17,8 @@ class ProductResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'attribute' => $this->attribute()/*->first()->title*/,  //todo
             'title' => $this->title,
-            'inventory' => $this->inventory,
-            'main_image' => $this->main_image,
-            'price' => $this->price()->first()->price,
-            'images' => ImageProductResource::collection($this->whenLoaded('images')),
-            'attribute_values' =>AttributeValueResource::collection($this->whenLoaded('attribute_values')),
         ];
     }
 }
