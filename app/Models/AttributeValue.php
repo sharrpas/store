@@ -17,7 +17,6 @@ class AttributeValue extends Model
 
     public function attribute()
     {
-        $this->belongsTo(Attribute::class,'attribute_id','id');
-        //TODO  does not work
+        return $this->belongsTo(Attribute::class,'attribute_id','id');
     }
 }

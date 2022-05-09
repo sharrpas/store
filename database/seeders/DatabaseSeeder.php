@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
         $v41 =  $attribute->values()->firstOrCreate(['title' => '41']);
 
         //products
-        $product = Product::query()->firstOrCreate(['title' => 'walking shoes', 'inventory' => 4]);
+        $product = Product::query()->firstOrCreate(['title' => 'walking shoes', 'inventory' => 4, 'main_image' => '##']);
         $product->price()->firstOrCreate(['price' => '15000']);
         $product->images()->firstOrCreate(['path' => '#########']);
 
