@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Attribute;
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
@@ -46,5 +47,10 @@ class DatabaseSeeder extends Seeder
         //attribute_values_product
         $product->attribute_values()->detach();
         $product->attribute_values()->attach($v41->id);
+
+        //carts
+        $user = User::query()->firstOrCreate(['name' => 'test', 'phone' => '0000', 'password' => '123']);
+        $user->cart()->firstOrCreate(['status' => 0, 'order_code' => '12345200263']);
+
     }
 }
