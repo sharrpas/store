@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
         $attribute = Attribute::query()->firstOrcreate(['title' => 'size']);
 
         //attribute_categories
-        $category->attributes()->detach();
+        $category->attributes()->detach($attribute->id);
         $category->attributes()->attach($attribute->id);
 
         //attribute_values
@@ -41,16 +41,17 @@ class DatabaseSeeder extends Seeder
         $product->images()->firstOrCreate(['path' => '#########']);
 
         //category_product
-        $product->categories()->detach();
+        $product->categories()->detach($category->id);
         $product->categories()->attach($category->id);
 
         //attribute_values_product
-        $product->attribute_values()->detach();
+        $product->attribute_values()->detach($v41->id);
         $product->attribute_values()->attach($v41->id);
 
         //carts
         $user = User::query()->firstOrCreate(['name' => 'test', 'phone' => '0000', 'password' => '123']);
-        $user->cart()->firstOrCreate(['status' => 0, 'order_code' => '12345200263']);
-
+        $cart = $user->cart()->firstOrCreate(['status' => 0, 'order_code' => '12345200263']);
+        $cart->products()->detach($product->id);
+        $cart->products()->attach($product->id,['num' => '1']);
     }
 }
