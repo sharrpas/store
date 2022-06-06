@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//authentication
 Route::post('/signup', [UserController::class, 'signup'])->name('signup');
 Route::post('/login', [UserController::class, 'login'])->name('login');
 Route::post('/logout',[UserController::class,'logout'])->middleware('auth:sanctum')->name('logout');
@@ -29,4 +31,5 @@ Route::get('categories',[CategoryController::class, 'index'])->name('categories'
 Route::get('{category}/products',[ProductController::class,'index']);
 Route::get('product/{product}',[ProductController::class,'show']);
 
-
+//cart
+Route::post('cart/{product}',[CartController::class,'store'])->middleware('auth:sanctum');
