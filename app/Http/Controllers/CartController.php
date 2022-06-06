@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CartResource;
 use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -10,7 +11,8 @@ class CartController extends Controller
 {
     public function show()
     {
-        //my cart
+        $user = auth()->user();
+       return $this->success(CartResource::make($user->cart()->first()));
     }
 
     public function store(Product $product)
@@ -31,5 +33,5 @@ class CartController extends Controller
     }
 
 
-    // OrderController for finalize order and remove from cart
+    //TODO OrderController for finalize order and remove from cart
 }

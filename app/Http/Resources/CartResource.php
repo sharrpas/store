@@ -2,23 +2,25 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Attribute;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\ProductCollection;
 
-class AttributeValueResource extends JsonResource
+
+class CartResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
     public function toArray($request)
     {
         return [
             'id' => $this->id,
-            'attribute' => $this->attribute()/*->first()->title*/,  //todo important
-            'title' => $this->title,
+            'status' => $this->status,
+            'products' => ProductResource::collection($this->products()->get()->load(['images','attribute_values'])),
+            //TODO is it really working?
         ];
     }
 }

@@ -32,4 +32,7 @@ Route::get('{category}/products',[ProductController::class,'index']);
 Route::get('product/{product}',[ProductController::class,'show']);
 
 //cart
+Route::get('cart',[CartController::class,'show'])->middleware('auth:sanctum');
 Route::post('cart/{product}',[CartController::class,'store'])->middleware('auth:sanctum');
+
+//todo do admin
