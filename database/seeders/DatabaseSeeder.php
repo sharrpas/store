@@ -6,6 +6,7 @@ use App\Models\Attribute;
 use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -50,9 +51,14 @@ class DatabaseSeeder extends Seeder
         $product->attribute_values()->attach($v41->id);
 
         //carts
-        $user = User::query()->firstOrCreate(['name' => 'test', 'phone' => '0000', 'password' => '123']);
+        $user = User::query()->firstOrCreate(['name' => 'admin', 'phone' => '0000'],[ 'password' => Hash::make('123')]);
         $cart = $user->cart()->firstOrCreate(['status' => 0, 'order_code' => '12345200263']);
         $cart->products()->detach($product->id);
         $cart->products()->attach($product->id,['num' => '1']);
+
+        //roles
+        $role =Role::query()->firstOrCreate(['title' => 'super_admin']);
+        $user->roles()->detach($role->id);
+        $user->roles()->attach($role->id);
     }
 }
