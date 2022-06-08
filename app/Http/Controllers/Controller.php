@@ -19,14 +19,12 @@ class Controller extends BaseController
     public function setHasError($hasError)
     {
         $this->hasError = $hasError;
-
         return $this;
     }
 
     public function setResponseCode($code)
     {
         $this->responseCode = $code;
-
         return $this;
     }
 
@@ -47,10 +45,11 @@ class Controller extends BaseController
             ->response($data, $code);
     }
 
-    public function error($error = null)
+    public function error($error = null, $data = null)
     {
         return $this->setHasError(true)
             ->setResponseCode(Response::HTTP_BAD_REQUEST)
-            ->response(is_int($error) ? Status::getMessage($error) : $error, $error);
+//            ->response(is_int($error) ? Status::getMessage($error) : $error, $error);
+            ->response($data, $error);
     }
 }

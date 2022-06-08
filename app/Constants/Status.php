@@ -33,6 +33,11 @@ class Status
 
         ];
 
-        return $messages[$code];
+        if(isset($messages[$code]))
+            return $messages[$code];
+
+        return $code;
+
+
     }
 }
