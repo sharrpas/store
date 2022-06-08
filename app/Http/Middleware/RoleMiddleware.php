@@ -17,7 +17,7 @@ class RoleMiddleware
      */
     public function handle(Request $request, Closure $next, $role = null)
     {
-        if (auth()->user()->roles()->where('name', 'super_admin')->count()) {
+        if (auth()->user()->roles()->where('title', 'super_admin')->count()) {
             return $next($request);
         }
 

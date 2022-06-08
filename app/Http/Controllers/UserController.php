@@ -48,9 +48,13 @@ class UserController extends Controller
 
         $pass_check = Hash::check($request->password, User::query()->where('phone', $request->phone)->firstOrFail()->password);
 
+        $isAdmin = false;
+
         if ($user && $pass_check) {
+            if ($user->roles()->where('title', 'super_admin')->count())$isAdmin=true;
             return $this->success([
                 'user' => $user,
+                'isAdmin' => $isAdmin,
                 'token' => $user->createToken('token_base_name')->plainTextToken
             ]);
         } else {
