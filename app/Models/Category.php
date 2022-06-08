@@ -12,7 +12,7 @@ class Category extends Model
 
     public function attributes()
     {
-        return $this->belongsToMany(Attribute::class,'attribute_categories');
+        return $this->hasMany(Attribute::class);
     }
 
     public function products()

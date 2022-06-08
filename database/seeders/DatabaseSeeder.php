@@ -27,11 +27,7 @@ class DatabaseSeeder extends Seeder
         Category::query()->firstOrCreate(['title' => 'hat']);
 
         //attributes
-        $attribute = Attribute::query()->firstOrcreate(['title' => 'size']);
-
-        //attribute_categories
-        $category->attributes()->detach($attribute->id);
-        $category->attributes()->attach($attribute->id);
+        $attribute = $category->attributes()->firstOrcreate(['title' => 'size']);
 
         //attribute_values
         $attribute->values()->firstOrCreate(['title' => '40']);
