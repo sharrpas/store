@@ -22,7 +22,7 @@ class ProductResource extends JsonResource
             'main_image' => $this->main_image,
             'price' => $this->price()->first()->price,
             'images' => ImageProductResource::collection($this->whenLoaded('images')),
-            'attribute_values' =>AttributeValueResource::collection($this->whenLoaded('attribute_values')),
+            'attributes' => json_decode($this->attributes),
         ];
     }
 }
