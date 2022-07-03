@@ -26,7 +26,8 @@ class DatabaseSeeder extends Seeder
         Category::query()->firstOrCreate(['title' => 'hat']);
 
         //products
-        $product = Product::query()->firstOrCreate(['title' => 'walking shoes', 'inventory' => 4, 'attributes' => '{ "colors": ["red"] }']);
+        $product = Product::query()->firstOrCreate([
+            'title' => 'walking shoes', 'inventory' => 4,'main_image' => '####', 'attributes' => '{ "color": ["red"] }']);
         $product->price()->firstOrCreate(['price' => '15000']);
         $product->images()->firstOrCreate(['path' => '#########']);
 

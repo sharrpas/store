@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('price_products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained('products');
-            $table->decimal('price');
+            $table->decimal('price',20);
             $table->timestamps();
         });
     }
