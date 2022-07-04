@@ -19,8 +19,8 @@ class CartResource extends JsonResource
         return [
             'id' => $this->id,
             'status' => $this->status,
-            'products' => ProductResource::collection($this->products()->get()->load(['images','attribute_values'])),
-            //TODO is it really working?
+            'products' => ProductResource::collection($this->products()->get()->load(['images'])),
+            //TODO is it really working?  create another resource mmmm,
         ];
     }
 }
