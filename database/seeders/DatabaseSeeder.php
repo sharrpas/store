@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
 
         //products
         $product = Product::query()->firstOrCreate([
-            'title' => 'walking shoes', 'inventory' => 4,'main_image' => '####', 'attributes' => '{ "color": ["red"] }']);
+            'title' => 'walking shoes',],[ 'inventory' => 4,'main_image' => '####', 'attributes' => '{ "color": ["red"] }']);
         $product->price()->firstOrCreate(['price' => '15000']);
         $product->images()->firstOrCreate(['path' => '#########']);
 
@@ -37,9 +37,9 @@ class DatabaseSeeder extends Seeder
 
         //carts
         $user = User::query()->firstOrCreate(['name' => 'admin', 'phone' => '0000'],[ 'password' => Hash::make('123')]);
-        $cart = $user->cart()->firstOrCreate(['status' => 0, 'order_code' => '12345200263']);
+        $cart = $user->cart()->firstOrCreate(['status' => 0]);
         $cart->products()->detach($product->id);
-        $cart->products()->attach($product->id,['num' => '1']);
+        $cart->products()->attach($product->id,['quantity' => '1', 'attributes' => '{ "color": ["red"] }']);
 
         //roles
         $role =Role::query()->firstOrCreate(['title' => 'super_admin']);

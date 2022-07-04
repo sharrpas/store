@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->integer('inventory');
-            $table->text('attributes');
+            $table->json('attributes');
             $table->text('main_image');
             $table->timestamps();
         });
