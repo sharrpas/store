@@ -3,10 +3,9 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\ProductCollection;
+use Illuminate\Support\Facades\Storage;
 
-
-class CartResource extends JsonResource
+class CartItemsResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,9 +16,9 @@ class CartResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'status' => $this->status,//todo change status code to text message
-            'products' => CartItemsResource::collection($this->cart_items()->get()),
+            'product' => CartProductResource::make($this->product()->first()->load(['images'])),
+            'quantity' => $this->quantity,
+            'attribute' => $this->attributes,
         ];
     }
 }
